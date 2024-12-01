@@ -41,7 +41,9 @@ echo -e "正在安装依赖: Docker... "
 echo y | bash <(curl -L -s https://cdn.jsdelivr.net/gh/xb0or/nginx-mtproxy@main/docker.sh)
 
 echo -e "正在安装nginx-mtproxy... "
-docker run --name nginx-mtproxy -d -e secret="$secret" -e domain="$domain" -p $wport:80 -p $port:443 ellermister/nginx-mtproxy:latest
+mkdir /home/mtproxy
+chmod /home/mtproxy
+docker run --name nginx-mtproxy -d -e secret="$secret" -e domain="$domain" -p $wport:80 -p $port:443 -v /home/mtproxy:/etc/nginx ellermister/nginx-mtproxy:latest
         ;;
     esac
 
